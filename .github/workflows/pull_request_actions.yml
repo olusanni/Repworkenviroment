@@ -42,7 +42,7 @@ jobs:
               - name : Install Terraform
                 uses: hashicorp/setup-terraform@v3
                 with:
-                  terraform_version: ${{env.TERRAFORM_VERSION}}
+                  terraform-version: ${{env.TERRAFORM_VERSION}}
                   terraform_wrapper: true
 
               - name : Install Terragrunt
@@ -86,13 +86,13 @@ jobs:
               - name : Install Terraform
                 uses: hashicorp/setup-terraform@v3
                 with:
-                   terraform_version: ${{env.TERRAFORM_VERSION}}
+                   terraform-version: ${{env.TERRAFORM_VERSION}}
                    terraform_wrapper: true
 
               - name : Install Terragrunt
                 uses: autero1/action-terragrunt@v3
                 with:
-                 terragrunt_version: ${{env.TERRAGRUNT_VERSION}}
+                 terragrunt-version: ${{env.TERRAGRUNT_VERSION}}
         
               - name: Configure AWS Credentials
                 uses: aws-actions/configure-aws-credentials@v4

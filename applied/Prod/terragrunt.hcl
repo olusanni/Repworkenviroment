@@ -5,10 +5,10 @@ remote_state {
     if_exists = "overwrite"
   }
   config = {
-    bucket         = "${get_aws_account_id()}-terraform-state-config"
+    bucket         = "${get_aws_account_id()}-new-terraform-state-config"
     key            = "${path_relative_to_include()}/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
-    dynamodb_table = "project-revolution-lock-config"
+    dynamodb_table = "project-new-revolution-lock-config"
   }
 }
