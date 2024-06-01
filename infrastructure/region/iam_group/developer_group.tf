@@ -2,7 +2,7 @@ module "developer" {
   source = "../../..//Modules/group"
 
   groupname                  = "developer-lab"
-  region                     = "us-east-1"
+  region                     = "us-east-2"
   policy_name                = "developer-cloudsentric-managed-policy"
   policy_description         = "cloudsentric-developer-polcy"
   inline_policy_to_attach    = data.aws_iam_policy_document.developer_inline_policy.json
