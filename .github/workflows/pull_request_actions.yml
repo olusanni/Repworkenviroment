@@ -47,6 +47,7 @@ jobs:
 
   run_plan_dev_environment:
       name: dev-enviroment terraform plan
+      needs: [kics]
       uses: ./.github/workflows/reuseable_plan_actions.yml
       with: 
         #ENVIRONMENT_NAME: "dev"
