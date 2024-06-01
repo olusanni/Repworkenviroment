@@ -47,7 +47,7 @@ jobs:
 
   run_plan_dev_environment:
       name: dev-enviroment terraform plan
-      uses: ./github/workflow/reuseable_plan_action.yml
+      uses: ./github/workflow/reuseable_plan_actions.yml
       with: 
         ENVIRONMENT_NAME: "dev"
         TERRAFORM_WORKING_DIR:  "./applied/Prod"
