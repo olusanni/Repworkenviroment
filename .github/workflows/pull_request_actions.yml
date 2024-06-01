@@ -1,16 +1,17 @@
 name: Terraform plan and apply
+
 on: 
     workflow_dispatch:
     push:
         branches:
-              - main
+         - main
 
     pull_request:
         branches:
-              - main
-            #- test - This is to show that multiple branches can be targeted for a specific event trigger
-            #- dev
-            #- sandbox
+          - main
+          #- test - This is to show that multiple branches can be targeted for a specific event trigger
+          #- dev
+          #- sandbox
 
 
 permissions:
@@ -28,7 +29,7 @@ jobs:
       - name: checkout
         uses : checkmarx/kics-github-action@v2.0.0
         with:
-          ref: {(github.event.pull_request.head.ref)}
+         ref: {(github.event.pull_request.head.ref)}
           
       - name:  Run kICS Scan
         uses : checkmarx/kics-github-action@v2.0.0
@@ -38,6 +39,11 @@ jobs:
           output_path: myResults/
           ignore_on_exit: results
           enable_comments: true
+
+      - name: display kics results
+        run: |
+          cat myResults/results.json
+
 
   run_plan_dev_environment:
       name: dev-enviroment terraform plan

@@ -2,17 +2,17 @@
 
 on:
     workflow_call:
-         Inputs:
-              TERRAFORM_VERSION: 1.7.2
+         inputs:
+              TERRAFORM_VERSION:
                   description: "terraform version to be run on runner"
                   required: true
                   type: string
-              TERRAGRUNT_VERSION: 0.58.0
+              TERRAGRUNT_VERSION:
                   description: "Terragrunt version to be installed on runner"
                   required: true
                   type: string
               TERRAFORM_WORKING_DIR:
-                  DESCRIPTION: "Path to the terraform configuration"
+                  description: "Path to the terraform configuration"
                   required: true
                   type: string
               AWS_REGION:
@@ -22,7 +22,8 @@ on:
                   required: true
                   type: string
 
-    apply:
+jobs:
+  Apply:
         name: "Terragrunt Apply"  
         environment: ${{inputs.ENVIRONMENT_NAME}}
         if: github.event_name == 'Push'

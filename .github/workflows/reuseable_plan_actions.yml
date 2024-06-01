@@ -2,28 +2,27 @@
 
 on:
     workflow_call:
-        Inputs:
-          TERRAFORM_VERSION: 1.7.2
+        inputs:
+          TERRAFORM_VERSION:
               description: "terraform version to be run on runner"
               required: true
               type: string
-          TERRAGRUNT_VERSION: 0.58.0
-              DESCRIPTION: "Terragrunt version to be installed on runner"
+          TERRAGRUNT_VERSION:
+              description: "Terragrunt version to be installed on runner"
               required: true
               type: string
           TERRAFORM_WORKING_DIR:
-              DESCRIPTION: "Path to the terraform configuration"
+              description: "Path to the terraform configuration"
               required: true
               type: string
           AWS_REGION:
               required: true
               type: string
           ENVIROMENT_NAME:
-            required: true
-            type: string
-
+              required: true
+              type: string
       
-  jobs:
+jobs:
         plan:
             name: "Terragrunt Init, Validate and Plan"
             if: github.event_name == 'pull_request'
@@ -31,7 +30,7 @@ on:
             defaults:
               run:
                 working-directory: ${{inputs.TERRAFORM_WORKING_DIR}}
-                        steps:
+            steps:
                   - name : "Checkout"
                     uses: actions/checkout@v4
                     with:
