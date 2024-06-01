@@ -27,9 +27,9 @@ jobs:
       runs-on: ubuntu-24.04
       steps:
       - name: checkout
-        uses : checkmarx/kics-github-action@v2.0.0
+        uses : actions/checkout@v3
         with:
-         ref: {(github.event.pull_request.head.ref)}
+         ref: ${{github.event.pull_request.head.ref}}
           
       - name:  Run kICS Scan
         uses : checkmarx/kics-github-action@v2.0.0
@@ -47,7 +47,7 @@ jobs:
 
   run_plan_dev_environment:
       name: dev-enviroment terraform plan
-      uses: ./github/workflow/reuseable_plan_actions.yml
+      uses: ./.github/workflows/reuseable_plan_actions.yml
       with: 
         ENVIRONMENT_NAME: "dev"
         TERRAFORM_WORKING_DIR:  "./applied/Prod"
@@ -58,8 +58,8 @@ jobs:
 
   run_apply_in_dev_environment:
       name: dev-environment terraform apply
-      needs: [run_plan_in_dev_environment]
-      uses: ./github/workflow/reuseable_apply_action.yml
+      needs: [run_plan_dev_environment]
+      uses: ./.github/workflows/reuseable_apply_actions.yml
       with: 
         ENVIRONMENT_NAME: "dev"
         TERRAFORM_WORKING_DIR:  "./applied/Prod"
@@ -71,7 +71,7 @@ jobs:
   run_plan_in_Prod_environment:
      name: Prod-environment terraform plan
      needs: [run_apply_in_dev_environment]
-     uses: ./github/workflow/reuseable_plan_action.yml
+     uses: ./.github/workflows/reuseable_plan_actions.yml
      with: 
        ENVIRONMENT_NAME: "Prod"
        TERRAFORM_WORKING_DIR:  "./applied/Prod"
@@ -82,8 +82,8 @@ jobs:
 
   run_apply_in_Prod_environment:
      name: Prod-environment terraform apply
-     needs: [run_plan_in_prod_environment]
-     uses: ./github/workflow/reuseable_apply_action
+     needs: [run_plan_in_Prod_environment]
+     uses: ./.github/workflows/reuseable_apply_actions.yml
      with: 
        ENVIRONMENT_NAME: "Prod"
        TERRAFORM_WORKING_DIR:  "./applied/Prod"
