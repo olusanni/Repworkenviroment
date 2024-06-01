@@ -18,9 +18,9 @@ on:
           AWS_REGION:
               required: true
               type: string
-          ENVIROMENT_NAME:
-              required: true
-              type: string
+          #ENVIROMENT_NAME:
+              #required: true
+              #type: string
       
 jobs:
         plan:

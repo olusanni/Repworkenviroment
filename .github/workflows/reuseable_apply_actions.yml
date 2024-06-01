@@ -18,14 +18,14 @@ on:
               AWS_REGION:
                  required: true
                  type: string
-              ENVIROMENT_NAME:
-                  required: true
-                  type: string
+              #ENVIROMENT_NAME:
+                  #required: true
+                  #type: string
 
 jobs:
   Apply:
         name: "Terragrunt Apply"  
-        environment: ${{inputs.ENVIRONMENT_NAME}}
+        #environment: ${{inputs.ENVIRONMENT_NAME}}
         if: github.event_name == 'Push'
         runs-on: ubuntu-24.04 
         defaults:
