@@ -1,12 +1,12 @@
 name: KICS Code Analysis
 
 on:
-    workflow_call
-    input:
-        ENABLE_COMMENTS:
-             required: TERRAGRUNT_VERSION
+    workflow_call:
+      inputs:
+         ENABLE_COMMENTS:
+          required: TERRAGRUNT_VERSION
           type: boolean
-       WORKING_DIRECTORY:
+         WORKING_DIRECTORY:
           required: true
           type: string
 

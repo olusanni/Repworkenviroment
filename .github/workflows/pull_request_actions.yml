@@ -34,7 +34,7 @@ jobs:
       - name:  Run kICS Scan
         uses : checkmarx/kics-github-action@v2.0.0
         with:
-          path: ./infrastructure/region/iam_group
+          path: ./infrastructure/region/lambda
           token: ${{ secrets.GITHUB_TOKEN }}
           output_path: myResults/
           ignore_on_exit: results
@@ -45,8 +45,8 @@ jobs:
           cat myResults/results.json
 
 
-  run_plan_dev_environment:
-      name: dev-enviroment terraform plan
+  run_plan_qa_environment:
+      name: qa-enviroment terraform plan
       needs: [kics]
       uses: ./.github/workflows/reuseable_plan_actions.yml
       with: 
@@ -57,9 +57,9 @@ jobs:
         AWS_REGION: "us-east-2"
       secrets: inherit
 
-  run_apply_in_dev_environment:
-      name: dev-environment terraform apply
-      needs: [run_plan_dev_environment]
+  run_apply_in_qa_environment:
+      name: qa-environment terraform apply
+      needs: [run_plan_qa_environment]
       uses: ./.github/workflows/reuseable_apply_actions.yml
       with: 
         #ENVIRONMENT_NAME: "dev"
@@ -69,29 +69,29 @@ jobs:
         AWS_REGION: "us-east-2"
       secrets: inherit
 
-  run_plan_in_Prod_environment:
-     name: Prod-environment terraform plan
-     needs: [run_apply_in_dev_environment]
-     uses: ./.github/workflows/reuseable_plan_actions.yml
-     with: 
+  #run_plan_in_Prod_environment:
+     #name: Prod-environment terraform plan
+     #needs: [run_apply_in_dev_environment]
+     #uses: ./.github/workflows/reuseable_plan_actions.yml
+     #with: 
        #ENVIRONMENT_NAME: "Prod"
-       TERRAFORM_WORKING_DIR:  "./applied/qa"
-       TERRAFORM_VERSION: "1.7.2"
-       TERRAGRUNT_VERSION: "0.58.0"
-       AWS_REGION: "us-east-2"
-     secrets: inherit
+       #TERRAFORM_WORKING_DIR:  "./applied/qa"
+       #TERRAFORM_VERSION: "1.7.2"
+       #TERRAGRUNT_VERSION: "0.58.0"
+       #AWS_REGION: "us-east-2"
+     #secrets: inherit
 
-  run_apply_in_Prod_environment:
-     name: Prod-environment terraform apply
-     needs: [run_plan_in_Prod_environment]
-     uses: ./.github/workflows/reuseable_apply_actions.yml
-     with: 
+  #run_apply_in_Prod_environment:
+     #name: Prod-environment terraform apply
+     #needs: [run_plan_in_Prod_environment]
+     #uses: ./.github/workflows/reuseable_apply_actions.yml
+     #with: 
        #ENVIRONMENT_NAME: "Prod"
-       TERRAFORM_WORKING_DIR:  "./applied/qa"
-       TERRAFORM_VERSION: "1.7.2"
-       TERRAGRUNT_VERSION: "0.58.0"
-       AWS_REGION: "us-east-2"
-     secrets: inherit
+       #TERRAFORM_WORKING_DIR:  "./applied/qa"
+       #TERRAFORM_VERSION: "1.7.2"
+       #TERRAGRUNT_VERSION: "0.58.0"
+       #AWS_REGION: "us-east-2"
+     #secrets: inherit
   
     
                   
