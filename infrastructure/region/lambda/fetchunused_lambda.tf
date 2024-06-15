@@ -1,4 +1,4 @@
-module "Fetchunused_lambda" {
+module "fetchunused_lambda" {
   source = "../../..//Modules/lambda"
 
  Lambdafunction_name = "fetchunused_iamrole"
