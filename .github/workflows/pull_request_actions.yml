@@ -45,7 +45,7 @@ jobs:
           cat myResults/results.json
 
 
-  run_plan_qa_environment:
+  run_plan_in_qa_environment:
       name: qa-enviroment terraform plan
       needs: [kics]
       uses: ./.github/workflows/reuseable_plan_actions.yml
@@ -59,7 +59,7 @@ jobs:
 
   run_apply_in_qa_environment:
       name: qa-environment terraform apply
-      needs: [run_plan_qa_environment]
+      needs: [run_plan_in_qa_environment]
       uses: ./.github/workflows/reuseable_apply_actions.yml
       with: 
         #ENVIRONMENT_NAME: "dev"
@@ -69,7 +69,7 @@ jobs:
         AWS_REGION: "us-east-2"
       secrets: inherit
 
-  run_plan_in_qa_environment:
+  run_plan_in_Prod_environment:
      name: Prod-environment terraform plan
      needs: [run_apply_in_qa_environment]
      uses: ./.github/workflows/reuseable_plan_actions.yml
