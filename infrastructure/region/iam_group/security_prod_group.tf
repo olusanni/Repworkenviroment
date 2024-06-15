@@ -2,7 +2,7 @@ module "security_Prod" {
   source = "../../..//Modules/group"
 
   groupname                  = "security_Prod-lab"
-  region                     = "us-east-1"
+  region                     = "us-east-2"
   policy_name                = "security_ProdProd-cloudsentric-managed-policy"
   policy_description         = "cloudsentric-security_Prod-polcy"
   inline_policy_to_attach    = data.aws_iam_policy_document.security_Prod_inline_policy.json
