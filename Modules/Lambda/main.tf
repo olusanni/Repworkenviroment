@@ -7,7 +7,7 @@ data "archive_file" "python" {
 
 resource "aws_lambda_function" "lambda_fetchrole" {
    function_name = var.Lambdafunction_name
-   filename      = data.archive_file.python.output_path
+   filename      = "${path.root}/../../../applied/qa/python/lambda_function_fetchrole.zip"
    handler       = "lambda_function.lambda_handler"
    role          = aws_iam_role.Fetch_role.arn
 
@@ -15,6 +15,26 @@ resource "aws_lambda_function" "lambda_fetchrole" {
 
    runtime = "python3.12"
 
+}
+ 
+resource "aws_cloudwatch_event_rule" "role_cleanup" {
+  name        = var.cloudwatch_rule
+  schedule_expression = var.schedule_expression
+}
+
+resource "aws_cloudwatch_event_target" "Lambda_target" {
+  rule      = aws_cloudwatch_event_rule.role_cleanup.name
+  target_id = "lambda"
+  arn       = aws_lambda_function.lambda_fetchrole.arn
+}
+
+
+resource "aws_lambda_permission" "allow_cloudwatch" {
+  statement_id  = "AllowExecutionFromCloudWatch"
+  action        = "lambda:InvokeFunction"
+  function_name = var.Lambdafunction_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.role_cleanup.arn
 }
 
 resource "aws_iam_role" "Fetch_role" {

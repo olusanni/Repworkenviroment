@@ -10,7 +10,7 @@ ssm_client = boto3.client('ssm')
 sns_client = boto3.client('sns')
 
 # SNS topic ARN - Replace with your actual SNS topic ARN
-SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:362255407745:IAMROLEDELETIONNOTIFICATIONS'
+SNS_TOPIC_ARN = 'arn:aws:sns:us-east-2:362255407745:Fetch_deleteNotification'
 
 def get_parameter(name):
     try:

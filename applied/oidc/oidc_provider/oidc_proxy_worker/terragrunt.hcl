@@ -1,5 +1,5 @@
 terraform {
-  source = "../../..//infrastructure/region/cloudwatch"
+  source = "../../../..//modules/oidc/oidc_proxy_worker"
 }
 
 include "root" {

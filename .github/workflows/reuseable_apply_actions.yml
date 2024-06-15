@@ -19,6 +19,7 @@ on:
                  required: true
                  type: string
               #ENVIROMENT_NAME:
+                  #description: "the environment to use in running workflows"
                   #required: true
                   #type: string
 
@@ -65,8 +66,8 @@ jobs:
                   run: terragrunt run-all apply -no-color --terragrunt-non-interactive 
                   continue-on-error: true    
 
-                - name: Terragrunt Destroy
-                  id: destroy
-                  run: terragrunt run-all destroy -no-color --terragrunt-non-interactive 
-                  continue-on-error: true  
+               # - name: Terragrunt Destroy
+                  #id: destroy
+                  #run: terragrunt run-all destroy -no-color --terragrunt-non-interactive 
+                  #continue-on-error: true  
 

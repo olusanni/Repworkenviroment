@@ -13,6 +13,21 @@ variable  "policy_name" {
     type = string
 }
 
+variable "cloudwatch_rule" {
+    description = "name to be given to cloud watch rule"
+    type = string
+    default = null
+}
+
+
+
+variable "schedule_expression" {
+    description = "the name given to the schedule expression"
+    type = string
+    default = null
+}
+
+
 variable "region" {
     type = string
 }
