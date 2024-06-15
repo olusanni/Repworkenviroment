@@ -4,7 +4,7 @@ on:
     workflow_call:
       inputs:
          ENABLE_COMMENTS:
-          required: TERRAGRUNT_VERSION
+          required: true
           type: boolean
          WORKING_DIRECTORY:
           required: true
